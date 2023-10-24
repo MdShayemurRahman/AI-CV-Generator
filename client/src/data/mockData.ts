@@ -1,4 +1,6 @@
-export const resumeData = [
+import { Resume } from "../types/Resume";
+
+export const resumeData: Resume[] = [
   {
     id: 1,
     username: 'user',
