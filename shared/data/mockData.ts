@@ -1,4 +1,4 @@
-import { Resume } from "../types/Resume";
+import { Resume } from '../../client/src/types/Resume';
 
 export const resumeData: Resume[] = [
   {
