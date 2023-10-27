@@ -16,8 +16,6 @@ export interface Resume {
   References: Reference[];
 }
 
-// import { Resume } from '../../client/src/types/Resume';
-
 // export const resumeData: Resume[] = [
 //   {
 //     id: 1,

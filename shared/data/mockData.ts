@@ -26,6 +26,13 @@ export const resumeData: Resume[] = [
         gpa: "3.8",
         field_of_study: "Computer Science",
       },
+      {
+        institude: "University of XYZ",
+        degree: "Bachelor in Software Engineering",
+        graduation_date: "May 2023",
+        gpa: "3.8",
+        field_of_study: "Computer Science",
+      },
     ],
     Skills: {
       technical_skills: ["Java", "Python", "SQL", "JavaScript", "HTML/CSS"],
