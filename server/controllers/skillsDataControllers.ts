@@ -1,10 +1,41 @@
-//CRUD:
-// 1. GetAllSkills method: "GET" "/api/resume/personal"
+import { Router } from 'express';
 
-// 2. GetSingleSkill method: "GET" "/api/resume/personal/:id"
+import { skills } from '../data/skills';
+import { Skills } from '../types/Skills';
 
-// 3. createAPersonalInfo method: "POST" "/api/resume/personal/"
+const getAllSkills = () => {
+  return skills;
+};
 
-// 4. Edit
+const getSkillById = (id: number) => {
+  const skill = skills.find((s) => s.id === id);
+  return skill;
+};
 
-// 5.Delete
+const addSkill = (newSkill: Skills) => {
+  newSkill.id = skills.length + 1;
+  skills.push(newSkill);
+  return newSkill;
+};
+
+const updateSkill = (id: number, updatedSkill: Skills) => {
+  const index = skills.findIndex((s) => s.id === id);
+  if (index === -1) {
+    return null;
+  }
+
+  skills[index] = { ...skills[index], ...updatedSkill };
+  return skills[index];
+};
+
+const deleteSkill = (id: number) => {
+  const index = skills.findIndex((s) => s.id === id);
+  if (index === -1) {
+    return null;
+  }
+
+  const deletedSkill = skills.splice(index, 1)[0];
+  return deletedSkill;
+};
+
+export { getAllSkills, getSkillById, addSkill, updateSkill, deleteSkill };
