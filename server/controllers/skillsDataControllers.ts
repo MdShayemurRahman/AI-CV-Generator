@@ -1,41 +1,38 @@
-import { Router } from 'express';
+import { Request, Response, NextFunction } from 'express';
 
-import { skills } from '../data/skills';
-import { Skills } from '../types/Skills';
+import { skillsData } from '../data/skillsData';
+import { ApiError } from '../middlewares/errors/ApiError';
 
-const getAllSkills = () => {
-  return skills;
-};
-
-const getSkillById = (id: number) => {
-  const skill = skills.find((s) => s.id === id);
-  return skill;
-};
-
-const addSkill = (newSkill: Skills) => {
-  newSkill.id = skills.length + 1;
-  skills.push(newSkill);
-  return newSkill;
-};
-
-const updateSkill = (id: number, updatedSkill: Skills) => {
-  const index = skills.findIndex((s) => s.id === id);
-  if (index === -1) {
-    return null;
+const getAllSkills = (_: Request, res: Response, next: NextFunction) => {
+  if (skillsData) {
+    res.status(200).json(skillsData);
+  } else {
+    next(ApiError.resourceNotFound('Order not found'));
   }
-
-  skills[index] = { ...skills[index], ...updatedSkill };
-  return skills[index];
 };
 
-const deleteSkill = (id: number) => {
-  const index = skills.findIndex((s) => s.id === id);
-  if (index === -1) {
-    return null;
+const getSkillById = (req: Request, res: Response, next: NextFunction) => {
+  const index = Number(req.params.id);
+  const skill = skillsData.filter((skill) => skill.id === index);
+
+  if (skill) {
+    res.status(200).json(skill);
+    return;
+  } else {
+    next(ApiError.resourceNotFound('Order not found'));
   }
-
-  const deletedSkill = skills.splice(index, 1)[0];
-  return deletedSkill;
 };
 
-export { getAllSkills, getSkillById, addSkill, updateSkill, deleteSkill };
+// const createSkill = (newSkill: Skills) => {
+
+// };
+
+// const updateSkill = (id: number, updatedSkill: Skills) => {
+
+// };
+
+// const deleteSkill = (id: number) => {
+
+// };
+
+export { getAllSkills, getSkillById };
