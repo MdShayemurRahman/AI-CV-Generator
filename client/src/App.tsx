@@ -4,7 +4,7 @@ import Homepage from './pages/Homepage';
 import Layout from './Layout';
 import PageNotFound from './pages/PageNotFound';
 import ImportCV from './pages/ImportCV';
-import CreateNewCV from './pages/CreateNewCV';
+import CreateNewCV from './pages/CreanteNewCV/index';
 
 function App() {
   return (

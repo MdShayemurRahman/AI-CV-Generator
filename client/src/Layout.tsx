@@ -10,7 +10,7 @@ const Layout = () => {
   return (
     <>
       <AppBar position='static'>
-        <Toolbar sx={{ margin: '2rem 5rem'}}>
+        <Toolbar sx={{ margin: '0.5rem 5rem'}}>
           <Typography variant='h4' sx={title}>
             Ai-CV Generator
           </Typography>
