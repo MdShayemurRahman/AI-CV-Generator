@@ -1,7 +1,7 @@
-import { Router } from 'express';
+import { Router } from "express";
 
-import { skills } from '../data/skills';
-import { Skills } from '../types/Skills';
+import { skills } from "../data/skills";
+import { Skills } from "../types/Skills";
 
 const getAllSkills = () => {
   return skills;
