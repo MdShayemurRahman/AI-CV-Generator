@@ -1,6 +1,3 @@
-import { Router } from "express";
-import { skills } from "../data/skills";
-import { Skills } from "../types/Skills";
 import { Request, Response, NextFunction } from 'express';
 
 import { skillsData } from '../data/skillsData';
@@ -25,7 +22,7 @@ const getSkillById = (req: Request, res: Response, next: NextFunction) => {
   res.json(skill);
 };
 
-const createSkill = (req: Request, res: Response, next: NextFunction) => {
+const createSkill = (req: Request, res: Response, _: NextFunction) => {
   const skill = req.body;
 
   skill.id = skillsData.length + 1;
@@ -44,12 +41,12 @@ const updateSkill = (req: Request, res: Response, next: NextFunction) => {
   const index = Number(req.params.id);
   const updatedIndex = skillsData.findIndex((skill) => skill.id === index);
   const updatedSkill = req.body;
-  
+
   if (updatedIndex === -1) {
     next(ApiError.resourceNotFound('Skill not found'));
     return;
   }
-  updatedSkill.id = index; 
+  updatedSkill.id = index;
   skillsData[updatedIndex] = updatedSkill;
   res.json(updatedSkill);
 };

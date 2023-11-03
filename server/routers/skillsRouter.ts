@@ -11,8 +11,8 @@ const skillsRouter = Router();
 
 skillsRouter.get('/', getAllSkills);
 skillsRouter.get('/:id', getSkillById);
-skillsRouter.post('/', createSkill);
-skillsRouter.patch('/:id', updateSkill);
+skillsRouter.post('/', createSkill);//
+skillsRouter.patch('/:id', updateSkill);//
 skillsRouter.delete('/:id', deleteSkill);
 
 
