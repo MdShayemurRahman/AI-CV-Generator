@@ -1,6 +1,6 @@
 import { Address } from "./Address";
 
-export interface PersonalInfo {
+export type PersonalInfo = {
   id: number;
   first_name: string;
   last_name: string;
@@ -10,4 +10,4 @@ export interface PersonalInfo {
   personal_website: string;
   address: Address;
   headline: string;
-}
+};

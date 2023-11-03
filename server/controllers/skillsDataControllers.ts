@@ -1,3 +1,6 @@
+import { Router } from "express";
+import { skills } from "../data/skills";
+import { Skills } from "../types/Skills";
 import { Request, Response, NextFunction } from 'express';
 
 import { skillsData } from '../data/skillsData';

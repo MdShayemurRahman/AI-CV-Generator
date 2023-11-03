@@ -1,11 +1,11 @@
-import { Router } from 'express';
+import { Router } from "express";
 import {
   createSkill,
   deleteSkill,
   getAllSkills,
   getSkillById,
   updateSkill,
-} from '../controllers/skillsDataControllers';
+} from "../controllers/skillsDataControllers";
 
 const skillsRouter = Router();
 
