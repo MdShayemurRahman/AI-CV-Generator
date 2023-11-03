@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import {
-  addSkill,
+  createSkill,
   deleteSkill,
   getAllSkills,
   getSkillById,
@@ -11,8 +11,9 @@ const skillsRouter = Router();
 
 skillsRouter.get('/', getAllSkills);
 skillsRouter.get('/:id', getSkillById);
-skillsRouter.post('/', addSkill);
-// skillsRouter.patch('/:id', updateSkill);
+skillsRouter.post('/', createSkill);
+skillsRouter.patch('/:id', updateSkill);
 skillsRouter.delete('/:id', deleteSkill);
+
 
 export default skillsRouter;
