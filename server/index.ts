@@ -1,20 +1,23 @@
-import express, { Express, Request, Response } from "express";
 import personalInfoRouter from "./routers/personalInfoRouter";
-
-// import dotenv from 'dotenv';
-
-// dotenv.config();
+import express, { Express, Request, Response } from 'express';
+import skillsRouter from './routers/skillsRouter';
+import { loggingMiddleware } from './middlewares/logging';
+import { apiErrorHandler } from './middlewares/apiErrorHandler';
+import { routeNotFound } from './middlewares/routeNotFound';
 
 const app: Express = express();
 const port = 8000;
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use(express.json());
 
 app.use("/", personalInfoRouter);
 
-app.get("/", (req: Request, res: Response) => {
-  res.send("Express + TypeScript Server");
-});
+app.use('/api/resume/skills', loggingMiddleware, skillsRouter);
+
+app.use(apiErrorHandler);
+//app.use(routeNotFound); //
 
 app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
