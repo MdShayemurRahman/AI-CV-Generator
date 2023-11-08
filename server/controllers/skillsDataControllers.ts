@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 
 import { skillsData } from '../data/skillsData';
 import { ApiError } from '../middlewares/errors/ApiError';
+import { CreateSkillInput, Skill, UpdateSkill } from '../types/Skill';
 
 const getAllSkills = (_: Request, res: Response, next: NextFunction) => {
   if (!skillsData) {
@@ -22,12 +23,15 @@ const getSkillById = (req: Request, res: Response, next: NextFunction) => {
   res.json(skill);
 };
 
-const createSkill = (req: Request, res: Response, _: NextFunction) => {
+const createSkill = (
+  req: Request,
+  res: Response,
+  _: NextFunction
+) => {
   const skill = req.body;
-
   skill.id = skillsData.length + 1;
 
-  const newSkill = {
+  const newSkill: Skill = {
     id: skill.id,
     technical_skills: skill.technical_skills,
     soft_skills: skill.soft_skills,
@@ -60,7 +64,7 @@ const deleteSkill = (req: Request, res: Response, next: NextFunction) => {
     return;
   }
   skillsData.splice(foundIndex, 1);
-  res.json(skillsData);
+  res.json({ msg: `Successfully Deleted skill with id: ${index}` });
 };
 
 export { getAllSkills, getSkillById, createSkill, updateSkill, deleteSkill };

@@ -1,6 +1,6 @@
-import { Skills } from '../types/Skills';
+import { Skill } from '../types/Skill';
 
-export const skillsData: Skills[] = [
+export const skillsData: Skill[] = [
   {
     id: 1,
     technical_skills: ['Java', 'Python', 'SQL', 'JavaScript', 'HTML/CSS'],
