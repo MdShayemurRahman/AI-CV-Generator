@@ -5,6 +5,7 @@ import educationRouter from './routers/educationRouter';
 import { loggingMiddleware } from './middlewares/logging';
 import { apiErrorHandler } from './middlewares/apiErrorHandler';
 import { routeNotFound } from './middlewares/routeNotFound';
+import { projectRouter } from "./routers/projectRouter";
 
 const app: Express = express();
 const port = 8000;
@@ -16,7 +17,7 @@ app.use("/", personalInfoRouter);
 
 app.use('/api/resume/skills', loggingMiddleware, skillsRouter);
 app.use('/api/resume/education', loggingMiddleware, educationRouter);
-
+ app.use('/api/resume/project', loggingMiddleware, projectRouter);
 
 app.use(apiErrorHandler);
 //app.use(routeNotFound); //
