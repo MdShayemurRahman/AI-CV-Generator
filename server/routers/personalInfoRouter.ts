@@ -1,4 +1,4 @@
-import express, { Router } from "express";
+import { Router } from "express";
 import {
   getAllPersonalInfo,
   getPersonalInfoById,
@@ -7,12 +7,12 @@ import {
   deletePersonalInfo,
 } from "../controllers/personalInfoController";
 
-const personalInfoRouter: Router = express.Router();
+const personalInfoRouter = Router();
 
-personalInfoRouter.get("/api/resume/personal", getAllPersonalInfo);
-personalInfoRouter.get("/api/resume/personal/:id", getPersonalInfoById);
-personalInfoRouter.post("/api/resume/personal/", addPersonalInfo);
-personalInfoRouter.put("/api/resume/personal/:id", updatePersonalInfo);
-personalInfoRouter.delete("/api/resume/personal/:id", deletePersonalInfo);
+personalInfoRouter.get("/", getAllPersonalInfo);
+personalInfoRouter.get("/:id", getPersonalInfoById);
+personalInfoRouter.post("/", addPersonalInfo);
+personalInfoRouter.put("/:id", updatePersonalInfo);
+personalInfoRouter.delete("/:id", deletePersonalInfo);
 
 export default personalInfoRouter;
