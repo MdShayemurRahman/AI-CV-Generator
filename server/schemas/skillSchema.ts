@@ -8,9 +8,3 @@ export const SkillBodySchema = z.object({
 export const SkillSchema = z.object({
   body: SkillBodySchema,
 });
-
-// const skill = {
-//   technical_skills: 1,
-// };
-
-// console.log(SkillBodySchema.parse(skill));

@@ -8,6 +8,7 @@ import { loggingMiddleware } from './middlewares/logging';
 import { apiErrorHandler } from './middlewares/apiErrorHandler';
 import { routeNotFound } from './middlewares/routeNotFound';
 import { projectRouter } from "./routers/projectRouter";
+import personalInfoRouter from './routers/personalInfoRouter';
 
 const app: Express = express();
 const port = 8000;
