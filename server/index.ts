@@ -2,6 +2,7 @@ import personalInfoRouter from "./routers/personalInfoRouter";
 import express, { Express, Request, Response } from 'express';
 import skillsRouter from './routers/skillsRouter';
 import educationRouter from './routers/educationRouter';
+import experienceRouter from './routers/experienceRouter';
 import { loggingMiddleware } from './middlewares/logging';
 import { apiErrorHandler } from './middlewares/apiErrorHandler';
 import { routeNotFound } from './middlewares/routeNotFound';
@@ -18,6 +19,7 @@ app.use("/", personalInfoRouter);
 app.use('/api/resume/skills', loggingMiddleware, skillsRouter);
 app.use('/api/resume/education', loggingMiddleware, educationRouter);
  app.use('/api/resume/project', loggingMiddleware, projectRouter);
+ app.use('/api/resume/experience', loggingMiddleware, experienceRouter);
 
 app.use(apiErrorHandler);
 //app.use(routeNotFound); //
