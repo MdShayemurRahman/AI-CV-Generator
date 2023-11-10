@@ -1,4 +1,6 @@
-export const personalInfo = [
+import { PersonalInfo } from "../types/PersonalInfo";
+
+export const personalInfoData: PersonalInfo[] = [
   {
     id: 1,
     first_name: "Alan",
