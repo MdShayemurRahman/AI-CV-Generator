@@ -1,5 +1,7 @@
 
 import express, { Express, Request, Response } from 'express';
+import mongoose from 'mongoose';
+import 'dotenv/config';
 
 import skillsRouter from './routers/skillsRouter';
 import educationRouter from './routers/educationRouter';
@@ -10,10 +12,15 @@ import { routeNotFound } from './middlewares/routeNotFound';
 import { projectRouter } from "./routers/projectRouter";
 import personalInfoRouter from './routers/personalInfoRouter';
 
+
 const app: Express = express();
 const port = 8000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// database connection..
+const mongoURL = process.env.DB_URL as string;
+mongoose.connect(mongoURL).then(() => console.log('DB Connected!'));
 
 app.use("/api/resume/personal", personalInfoRouter);
 app.use('/api/resume/skills', loggingMiddleware, skillsRouter);
