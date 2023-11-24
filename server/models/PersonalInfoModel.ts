@@ -1,27 +1,54 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
 
 const Address = new Schema({
-  street_addr: [String],
-  city: [String],
-  country: [String],
+  street_addr: {
+    type: String,
+  },
+  city: {
+    type: String,
+  },
+  country: {
+    type: String,
+  },
 });
 
 const PersonalInfoSchema = new Schema(
   {
-    first_name: [String],
-    last_name: [String],
-    email: [String],
-    phone_no: [String],
-    linkedin_profile: [String],
-    personal_website: [String],
-    address: Address,
-    headline: [String],
+    first_name: {
+      type: String,
+      required: true,
+    },
+    last_name: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    phone_no: {
+      type: String,
+    },
+    linkedin_profile: {
+      type: String,
+    },
+    personal_website: {
+      type: String,
+    },
+    address: {
+      type: Address,
+    },
+    headline: {
+      type: String,
+      required: true,
+    },
   },
   {
     versionKey: false,
   }
 );
 
-export default mongoose.model("personalInfo", PersonalInfoSchema);
+export default mongoose.model('personalInfo', PersonalInfoSchema);

@@ -39,10 +39,10 @@ const Pdfpage: FC<datapProps> = ({ Resume }: datapProps) => {
             <Image src={avatar} />
             </View>
             <View style={styles.section} key={index}>
-            <Text>{item.personal_info.first_name}</Text>
+            <Text>{item.person.first_name}</Text>
           </View>
           <View style={styles.section} key={index}>
-              <Text>{item.personal_info.last_name}</Text>
+              <Text>{item.person.last_name}</Text>
           </View>
           </View>
         ))}

@@ -4,6 +4,10 @@ const Schema = mongoose.Schema;
 
 const SkillSchema = new Schema(
   {
+    person_Id: {
+      type: Schema.Types.ObjectId,
+      ref: 'personalInfo',
+    },
     technical_skills: {
       type: [String],
     },
