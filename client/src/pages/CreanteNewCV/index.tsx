@@ -13,7 +13,7 @@ const CreateNewCV = () => {
           {"Download now!"}
           <PDFDownloadLink
             document={<PdfResume Resume={resumeData}/>}
-            fileName={resumeData.map(item => `${item.personal_info.first_name} ${item.personal_info.last_name}`).join(',')}
+            fileName={resumeData.map(item => `${item.person.first_name} ${item.person.last_name}`).join(',')}
              >
             {({ blob, url, loading, error }) =>
               loading ? "Loading document..." : "Download now!"

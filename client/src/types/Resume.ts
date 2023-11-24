@@ -1,19 +1,40 @@
 import { PersonalInfo } from "./PersonalInfo";
 import { Reference } from "./Reference";
 import { Education } from "./Education";
-import { Skills } from "./Skills";
+// import { Skills } from "./Skills";
 import { WorkExperience } from "./WorkExperience";
 import { Project } from "./Project";
 
+export interface Address {
+  street_addr: string;
+  city: string;
+  country: string;
+  _id: string;
+}
+
+export interface Person {
+  _id: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone_no: string;
+  linkedin_profile: string;
+  address: Address;
+  headline: string;
+}
+
+export interface Skills {
+  _id: string;
+  person_Id: string;
+  technical_skills: string[];
+  soft_skills: string[];
+}
+
 export interface Resume {
-  id: number;
-  username: string;
-  personal_info: PersonalInfo;
-  education: Education[];
-  Skills: Skills;
-  Work_Experience: WorkExperience[];
-  Projects: Project[];
-  References: Reference[];
+  _id: string;
+  person: Person;
+  skills: Skills;
+  __v: number;
 }
 
 // export const resumeData: Resume[] = [
