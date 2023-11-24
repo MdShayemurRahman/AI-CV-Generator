@@ -1,108 +1,84 @@
-import { Request, Response, NextFunction } from "express";
-import { personalInfoData } from "../data/personalInfoData";
-import { ApiError } from "../middlewares/errors/ApiError";
-import { PersonalInfo } from "../types/PersonalInfo";
+import { Request, Response, NextFunction } from 'express';
+
+import { ApiError } from '../middlewares/errors/ApiError';
+import personalInfoServices from '../services/personalInfoServices';
 
 // Method 1: Get all personal information
-export const getAllPersonalInfo = (
+export const getAllPersonalInfo = async (
   _: Request,
   res: Response,
   next: NextFunction
 ) => {
-  if (!personalInfoData) {
-    next(ApiError.resourceNotFound("AllPersnalInfo not found"));
+  const userList = await personalInfoServices.findAll();
+  if (userList.length < 1) {
+    next(ApiError.resourceNotFound('Person info not found'));
     return;
   }
-  res.json(personalInfoData);
+  res.status(200).json(userList);
 };
 
 // Method 2: Get a single person's information by ID
-export const getPersonalInfoById = (
+export const getPersonalInfoById = async(
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  const personId = Number(req.params.id);
-  const person = personalInfoData.find((p) => p.id === personId);
+  const index = req.params.id;
+  const info = await personalInfoServices.findOne(index);
 
-  if (!person) {
-    next(ApiError.resourceNotFound("PersonalInfo not found"));
+  if (!info) {
+    next(ApiError.resourceNotFound('Person info not found'));
     return;
   }
-  res.json(person);
+  res.status(200).json(info);
 };
 
 // Method 3: Add personal info
-export const addPersonalInfo = (
+export const addPersonalInfo = async(
   req: Request,
   res: Response,
-  _: NextFunction
+  next: NextFunction
 ) => {
-  const newPersonalInfo: PersonalInfo = req.body;
-
-  personalInfoData.push({
-    id: personalInfoData.length + 1,
-    first_name: newPersonalInfo.first_name,
-    last_name: newPersonalInfo.last_name,
-    email: newPersonalInfo.email,
-    phone_no: newPersonalInfo.phone_no,
-    linkedin_profile: newPersonalInfo.linkedin_profile || "",
-    personal_website: newPersonalInfo.personal_website || "",
-    address: newPersonalInfo.address,
-    headline: newPersonalInfo.headline || "",
-  });
-
-  res.json(newPersonalInfo);
+  const newInfo = req.body;
+  const info = await personalInfoServices.createOne(newInfo);
+  if (!info) {
+    next(ApiError.badRequest('Not a valid data'));
+    return;
+  }
+  res.status(201).json(info);
 };
 
 // Method 4: Update personal info
-export const updatePersonalInfo = (
+export const updatePersonalInfo = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  const { id } = req.params;
-  const updatedAttributes = req.body;
+  const index = req.params.id;
+  const updatedInfo = req.body;
 
-  // Find the personal information by ID
-  const personalInfoToUpdate = personalInfoData.find(
-    (info) => info.id === Number(id)
-  );
+  const info = await personalInfoServices.updateOne(index, updatedInfo);
 
-  if (!personalInfoToUpdate) {
-    next(ApiError.resourceNotFound("PersonalInfo not found"));
+  if (!info) {
+    next(ApiError.resourceNotFound('Info not found'));
     return;
   }
-
-  // Update the specified attributes with the new values
-  Object.keys(updatedAttributes).forEach((attribute) => {
-    personalInfoToUpdate[attribute] = updatedAttributes[attribute];
-  });
-
-  res.json(updatedAttributes);
+  res.status(200).json(info);
 };
 
 // 5.Delete
-
-export const deletePersonalInfo = (
+export const deletePersonalInfo = async(
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  const { id } = req.params;
+  const index = req.params.id;
+  const foundIndex = await personalInfoServices.removeOne(index);
 
-  // Find the index of the personal information by ID
-  const index = personalInfoData.findIndex((info) => info.id === Number(id));
-
-  if (index === -1) {
-    next(ApiError.resourceNotFound("PersonalInfo not found"));
+  if (foundIndex === null) {
+    next(ApiError.resourceNotFound('Info not found'));
     return;
   }
 
-  // Remove the personal information entry from the array
-  personalInfoData.splice(index, 1);
-
-  res.json({
-    msg: `Personal information with id ${index} deleted successfully`,
-  });
+  res.status(200).json({ msg: `Successfully Deleted info with id: ${index}` });
 };

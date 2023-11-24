@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
 
-import { skillsData } from '../data/skillsData';
 import { ApiError } from '../middlewares/errors/ApiError';
 import { Skill } from '../types/Skill';
 import skillServices from '../services/skillServices';
@@ -8,7 +7,7 @@ import skillServices from '../services/skillServices';
 const getAllSkills = async (_: Request, res: Response, next: NextFunction) => {
   const skillList = await skillServices.getAllSkills();
   if (skillList.length < 1) {
-    next(ApiError.resourceNotFound('Order not found'));
+    next(ApiError.resourceNotFound('Skill not found'));
     return;
   }
   res.status(200).json(skillList);
@@ -36,7 +35,7 @@ const createSkill = async (req: Request, res: Response, next: NextFunction) => {
     next(ApiError.badRequest('Not a valid data'));
     return;
   }
-  res.status(200).json(skill);
+  res.status(201).json(skill);
 };
 
 const updateSkill = async (req: Request, res: Response, next: NextFunction) => {
