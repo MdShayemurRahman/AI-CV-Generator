@@ -1,18 +1,25 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
-const ResumeSchema = new mongoose.Schema({
-  personInfo: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'PersonInfo',
-    required: true,
+const Schema = mongoose.Schema;
+
+const ResumeSchema = new Schema(
+  {
+    person: {
+      type: Schema.Types.ObjectId,
+      ref: 'personalInfo',
+      required: true,
+    },
+    skills: {
+      type: Schema.Types.ObjectId,
+      ref: 'skill',
+    },
   },
-  skills: { type: mongoose.Schema.Types.ObjectId, ref: 'Skill' },
-  educations: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Education' }],
-  experiences: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Experience' }],
-  projects: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Project' }],
-});
+  {
+    versionKey: false,
+  }
+);
 
-const PersonWithOptionalFields = mongoose.model('ResumeSchema', ResumeSchema);
+export default mongoose.model('Resume', ResumeSchema);
 
 // // Define schemas for each entity
 // const personInfoSchema = new mongoose.Schema({

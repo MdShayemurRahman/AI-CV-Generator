@@ -11,6 +11,7 @@ import { apiErrorHandler } from './middlewares/apiErrorHandler';
 import { routeNotFound } from './middlewares/routeNotFound';
 import { projectRouter } from "./routers/projectRouter";
 import personalInfoRouter from './routers/personalInfoRouter';
+import resumeRouter from './routers/resumeRouter';
 
 
 const app: Express = express();
@@ -22,6 +23,7 @@ app.use(express.urlencoded({ extended: true }));
 const mongoURL = process.env.DB_URL as string;
 mongoose.connect(mongoURL).then(() => console.log('DB Connected!'));
 
+app.use('/api/resume', loggingMiddleware, resumeRouter);
 app.use("/api/resume/personal", personalInfoRouter);
 app.use('/api/resume/skills', loggingMiddleware, skillsRouter);
 app.use('/api/resume/education', loggingMiddleware, educationRouter);

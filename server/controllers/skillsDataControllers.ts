@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 
 import { ApiError } from '../middlewares/errors/ApiError';
-import { Skill } from '../types/Skill';
+import { Skill, UpdateSkill } from '../types/Skill';
 import skillServices from '../services/skillServices';
 
 const getAllSkills = async (_: Request, res: Response, next: NextFunction) => {
@@ -31,6 +31,7 @@ const getSkillById = async (
 const createSkill = async (req: Request, res: Response, next: NextFunction) => {
   const newSkill = req.body;
   const skill = await skillServices.createSkill(newSkill);
+  
   if (!skill) {
     next(ApiError.badRequest('Not a valid data'));
     return;

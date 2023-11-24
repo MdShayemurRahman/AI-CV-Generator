@@ -10,8 +10,34 @@ const getAllSkills = async () => {
 
 // 2. create a new data in the database
 const createSkill = async (newData: CreateSkillInput) => {
-  const newSkill = new SkillModel(newData);
-  return await newSkill.save();
+  const existingSkill = await SkillModel.findOne({
+    person_Id: newData.person_Id,
+  });
+
+  if (existingSkill) {
+    const uniqueTechnicalSkills = [
+      ...new Set([
+        ...existingSkill.technical_skills,
+        ...newData.technical_skills,
+      ]),
+    ];
+
+    const uniqueSoftSkills = [
+      ...new Set([...existingSkill.soft_skills, ...newData.soft_skills]),
+    ];
+
+    existingSkill.technical_skills = uniqueTechnicalSkills;
+    existingSkill.soft_skills = uniqueSoftSkills;
+
+    return await existingSkill.save();
+  } else {
+    const newSkill = new SkillModel({
+      person_Id: newData.person_Id,
+      technical_skills: newData.technical_skills,
+      soft_skills: newData.soft_skills,
+    });
+    return await newSkill.save();
+  }
 };
 
 // 3. get a single data
@@ -22,7 +48,12 @@ const getSingleSkill = async (skillId: string) => {
 // 4. update a single data
 const updateSkill = async (skillId: string, updateSkill: UpdateSkill) => {
   const id = new mongoose.Types.ObjectId(skillId);
-  return await SkillModel.findByIdAndUpdate(id, updateSkill, { new: true });
+  const updatePayload = {
+    technical_skills: updateSkill.technical_skills,
+    soft_skills: updateSkill.soft_skills,
+  };
+
+  return await SkillModel.findByIdAndUpdate(id, updatePayload, { new: true });
 };
 
 // 5. Delete a single Skill
