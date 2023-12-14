@@ -8,7 +8,7 @@ import educationRouter from './routers/educationRouter';
 import experienceRouter from './routers/experienceRouter';
 import { loggingMiddleware } from './middlewares/logging';
 import { apiErrorHandler } from './middlewares/apiErrorHandler';
-// import { routeNotFound } from './middlewares/routeNotFound';
+import { routeNotFound } from './middlewares/routeNotFound';
 import { projectRouter } from './routers/projectRouter';
 import personalInfoRouter from './routers/personalInfoRouter';
 import resumeRouter from './routers/resumeRouter';
@@ -35,7 +35,8 @@ app.use('/api/resume/project', loggingMiddleware, projectRouter);
 app.use('/api/resume/experience', loggingMiddleware, experienceRouter);
 
 app.use(apiErrorHandler);
-//app.use(routeNotFound); //
+app.use(routeNotFound); 
+
 
 app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${port}`);

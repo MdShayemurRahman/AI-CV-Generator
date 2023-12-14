@@ -19,6 +19,7 @@ const getSkillById = async (
   next: NextFunction
 ) => {
   const index = req.params.id;
+  console.log(index);
   const skill = await skillServices.getSingleSkill(index);
 
   if (!skill) {
