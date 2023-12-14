@@ -14,7 +14,7 @@ function App() {
         <Route path='/' element={<Layout />}>
           <Route index element={<Homepage />} />
           <Route path='/import-from-existing' element={<ImportCV />} />
-          <Route path='/create-new-cv' element={<CreateNewCV />} />
+          {/* <Route path='/create-new-cv' element={<CreateNewCV />} /> */}
           <Route path='/profile/:id' element={<ProfilePage />} />
         </Route>
         <Route path='*' element={<PageNotFound />} />

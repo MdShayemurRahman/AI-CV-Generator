@@ -10,7 +10,7 @@ const ImportCV = () => {
   useEffect(() => {
     const fetchResumeData = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/Resume');
+        const response = await axios.get('http://localhost:8080/api/Resume');
         setAllResume(response.data); 
       } catch (error) {
         console.error('Error fetching resume data:', error);
