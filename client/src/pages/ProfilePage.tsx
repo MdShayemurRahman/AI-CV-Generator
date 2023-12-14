@@ -11,7 +11,7 @@ const ProfilePage = () => {
     const fetchResumeDetails = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/api/Resume/${id}`
+          `https://cv-app-server.onrender.com/api/resume/${id}`
         );
         setResumeDetails(response.data);
       } catch (error) {

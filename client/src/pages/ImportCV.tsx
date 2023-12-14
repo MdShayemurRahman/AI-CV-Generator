@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 
 import { Person, Resume } from '../types/Resume';
 import { Link } from 'react-router-dom';
@@ -10,16 +10,16 @@ const ImportCV = () => {
   useEffect(() => {
     const fetchResumeData = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/api/Resume');
-        setAllResume(response.data); 
+        const response = await axios.get(
+          'https://cv-app-server.onrender.com/api/resume/'
+        );
+        setAllResume(response.data);
       } catch (error) {
         console.error('Error fetching resume data:', error);
       }
     };
-    fetchResumeData(); 
+    fetchResumeData();
   }, []);
-
- 
 
   return (
     <div className='resume-list'>
@@ -35,6 +35,6 @@ const ImportCV = () => {
       </ul>
     </div>
   );
-}
+};
 
-export default ImportCV
+export default ImportCV;
