@@ -39,7 +39,7 @@ const PersonalInfoSchema = new Schema(
       type: String,
     },
     address: {
-      type: Address,
+      type: String,
     },
     headline: {
       type: String,

@@ -23,15 +23,7 @@ export const PersonalInfoBodySchema = z.object({
     .url('Invalid personal website URL')
     .max(200, "Personal website URL can't exceed 200 characters")
     .optional(),
-  address: z
-    .object({
-      street_addr: z
-        .string()
-        .max(100, "Street address can't exceed 100 characters"),
-      city: z.string().max(50, "City can't exceed 50 characters"),
-      country: z.string().max(50, "Country can't exceed 50 characters"),
-    })
-    .optional(),
+  address: z.string().optional(),
   headline: z.string().max(500, "Headline can't exceed 500 characters"),
 });
 

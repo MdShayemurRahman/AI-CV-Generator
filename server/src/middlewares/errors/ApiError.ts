@@ -9,7 +9,7 @@ export class ApiError {
   static badRequest(msg: string) {
     return new ApiError(400, msg);
   }
-  static internal(msg: string) {
+  static internalServerError(msg: string) {
     return new ApiError(500, msg);
   }
 }

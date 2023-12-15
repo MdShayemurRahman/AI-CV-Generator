@@ -5,12 +5,15 @@ import { Skill, UpdateSkill } from '../types/Skill';
 import skillServices from '../services/skillServices';
 
 const getAllSkills = async (_: Request, res: Response, next: NextFunction) => {
-  const skillList = await skillServices.getAllSkills();
-  if (skillList.length < 1) {
-    next(ApiError.resourceNotFound('Skill not found'));
-    return;
+  try {
+    const skillList = await skillServices.getAllSkills();
+    if (skillList.length < 1) {
+      return next(ApiError.resourceNotFound('Skill not found'));
+    }
+    res.status(200).json(skillList);
+  } catch (error) {
+    return next(ApiError.internalServerError('Error fetching skills'));
   }
-  res.status(200).json(skillList);
 };
 
 const getSkillById = async (

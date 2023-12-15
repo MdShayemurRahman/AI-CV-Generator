@@ -1,19 +1,18 @@
 import React from 'react';
-import { Button, Grid, Paper, Box } from "@mui/material/";
-import { PDFDownloadLink } from "@react-pdf/renderer";
-import Form from './Form';
-import DocumentResume from './Documentresume';
-import dummyFormData from '../../mockData/dummydata';
+import { Button, Grid, Paper, Box } from '@mui/material/';
+import { PDFDownloadLink } from '@react-pdf/renderer';
+import Form from './CreanteNewCV/PersonInfoForm';
+import DocumentResume from './CreanteNewCV/Documentresume';
+import dummyFormData from '../mockData/dummydata';
 
-const CreateNewCV = () => {
+const CreateNewResume = () => {
   return (
     <Grid container style={{ padding: '1rem' }}>
-
       {/* Left Side (Form) */}
       <Grid item xs={5} spacing={6} style={{ paddingRight: '1rem' }}>
-        <Paper elevation={4}>
-          <Form />
-        </Paper>
+        {/* <Paper elevation={4}> */}
+        <Form />
+        {/* </Paper> */}
       </Grid>
 
       {/* Right Side (DocumentResume) */}
@@ -24,6 +23,6 @@ const CreateNewCV = () => {
       </Grid>
     </Grid>
   );
-}
+};
 
-export default CreateNewCV;
+export default CreateNewResume;

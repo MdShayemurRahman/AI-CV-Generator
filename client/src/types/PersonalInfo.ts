@@ -1,13 +1,10 @@
-import { Address } from "./Address";
-
-export interface PersonalInfo {
-  id: number;
+// import { Address } from "./Address";
+export interface Person {
   first_name: string;
   last_name: string;
   email: string;
   phone_no: string;
   linkedin_profile: string;
-  personal_website: string;
-  address: Address;
+  address: string;
   headline: string;
 }
